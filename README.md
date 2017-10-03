@@ -23,9 +23,11 @@ Push to GitHub. Branch builds will be tagged in Dockerhub as `harrystech:circlec
 
 Merge to master and tag. Tagged builds will be tagged in Dockerhub as `harrystech:circleci:$TAG`
 
-e.g.
+Example
 
     git tag 0.0.5
     git push --tags
 
-Dockerhub page: https://hub.docker.com/r/harrystech/circleci/
+## Docker Hub
+
+[https://hub.docker.com/r/harrystech/circleci/](https://hub.docker.com/r/harrystech/circleci/)
