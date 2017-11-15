@@ -89,17 +89,17 @@ RUN set -ex \
 
 # Install geckodriver
 RUN \
-    url=https://github.com/mozilla/geckodriver/releases/download/v0.19.0/geckodriver-v0.19.0-linux64.tar.gz \
+    url=https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz \
     && curl -s -L "$url" | tar -xz \
     && chmod +x geckodriver \
     && mv geckodriver /usr/local/bin
 
 
 ########
-# install firefox v52
+# install firefox
 ENV PATH /firefox:$PATH
-RUN FIREFOX_URL="https://download-installer.cdn.mozilla.net/pub/firefox/releases/55.0.3/linux-x86_64/en-US/firefox-55.0.3.tar.bz2" \
-    FIREFOX_SHA256="f0fd11357de7250660f1a5c5b209c44de1d0f50bb1d3444dd2afad6b41e15b9d" \
+RUN FIREFOX_URL="https://download-installer.cdn.mozilla.net/pub/firefox/releases/57.0/linux-x86_64/en-US/firefox-57.0.tar.bz2" \
+    FIREFOX_SHA256="c2cae016089e816c03283a359c582efab3bca34e6048ecc2382b43c1eb342457" \
   && curl --silent --show-error --location --fail --retry 3 --output /tmp/firefox.tar.bz2 $FIREFOX_URL \
   && echo "$FIREFOX_SHA256 /tmp/firefox.tar.bz2" | sha256sum -c \
   && tar -jxf /tmp/firefox.tar.bz2 \
