@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.6
+
+- Update node to 8.9.1
+- Update Firefox to v57.0
+
 ## v0.0.5
 
 - Base on Circle's Ruby image
