@@ -1,4 +1,4 @@
-FROM circleci/ruby:2.4.2
+FROM circleci/ruby:2.4.3
 
 RUN sudo apt-get update
 RUN sudo apt-get install -y \
