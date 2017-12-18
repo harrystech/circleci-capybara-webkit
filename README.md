@@ -17,11 +17,11 @@ Our base CircleCI image.
 
 ## Push to Dockerhub
 
-Push to GitHub. Branch builds will be tagged in Dockerhub as `harrystech:circleci:$BRANCH_NAME`
+Push to GitHub. Branch builds will be tagged in Dockerhub as `harrystech/circleci:$BRANCH_NAME`
 
 ## Release
 
-Merge to master and tag. Tagged builds will be tagged in Dockerhub as `harrystech:circleci:$TAG`
+Merge to master and tag. Tagged builds will be tagged in Dockerhub as `harrystech/circleci:$TAG`
 
 Example
 
