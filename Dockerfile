@@ -1,4 +1,4 @@
-FROM circleci/ruby:2.4.3
+FROM circleci/ruby:2.5.0
 
 RUN sudo apt-get update
 RUN sudo apt-get install -y \
@@ -9,8 +9,6 @@ RUN sudo apt-get install -y \
     libasound2 \
     libgtk-3-0 \
     libstartup-notification0 \
-    libjsoncpp0 \
-    libhunspell-1.3-0 \
     gconf-service \
     libgconf-2-4 \
     libnspr4 \
