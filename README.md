@@ -3,11 +3,10 @@
 ## Intro
 
 Our base CircleCI image.
+
 - Circle CI's Ruby docker image.
 - qt5 (for Capybara Webkit) and postgresql-client installed from apt.
 - Node 8.9.1 (from Joyent's dockerfiles)
-- Firefox v57 (aka Quantum)
-- Geckodriver
 - Chrome latest
 - Chromedriver latest
 
