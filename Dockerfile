@@ -2,21 +2,21 @@ FROM circleci/ruby:2.5.1
 
 RUN sudo apt-get update
 RUN sudo apt-get install -y \
-    libqt5webkit5-dev\
-    qt5-default\
-    postgresql-client\
-    lsof \
-    libasound2 \
-    libgtk-3-0 \
-    libstartup-notification0 \
-    gconf-service \
-    libgconf-2-4 \
-    libnspr4 \
-    libxss1 \
-    fonts-liberation \
-    libappindicator1 \
-    libnss3 \
-    xdg-utils
+  libqt5webkit5-dev\
+  qt5-default\
+  postgresql-client\
+  lsof \
+  libasound2 \
+  libgtk-3-0 \
+  libstartup-notification0 \
+  gconf-service \
+  libgconf-2-4 \
+  libnspr4 \
+  libxss1 \
+  fonts-liberation \
+  libappindicator1 \
+  libnss3 \
+  xdg-utils
 
 USER root
 
@@ -87,23 +87,27 @@ RUN set -ex \
 
 # install chrome
 RUN curl --silent --show-error --location --fail --retry 3 --output /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-      && (dpkg -i /tmp/google-chrome-stable_current_amd64.deb || apt-get -fy install)  \
-      && rm -rf /tmp/google-chrome-stable_current_amd64.deb \
-      && sed -i 's|HERE/chrome"|HERE/chrome" --disable-setuid-sandbox --no-sandbox|g' \
-           "/opt/google/chrome/google-chrome" \
-      && google-chrome --version
+  && (dpkg -i /tmp/google-chrome-stable_current_amd64.deb || apt-get -fy install)  \
+  && rm -rf /tmp/google-chrome-stable_current_amd64.deb \
+  && sed -i 's|HERE/chrome"|HERE/chrome" --disable-setuid-sandbox --no-sandbox|g' \
+    "/opt/google/chrome/google-chrome" \
+  && google-chrome --version
 
 # Install ChromeDriver
 RUN export CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chromedriver.storage.googleapis.com/LATEST_RELEASE) \
-      && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_RELEASE/chromedriver_linux64.zip" \
-      && cd /tmp \
-      && unzip chromedriver_linux64.zip \
-      && rm -rf chromedriver_linux64.zip \
-      && mv chromedriver /usr/local/bin/chromedriver \
-      && chmod +x /usr/local/bin/chromedriver \
-      && chromedriver --version
+  && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_RELEASE/chromedriver_linux64.zip" \
+  && cd /tmp \
+  && unzip chromedriver_linux64.zip \
+  && rm -rf chromedriver_linux64.zip \
+  && mv chromedriver /usr/local/bin/chromedriver \
+  && chmod +x /usr/local/bin/chromedriver \
+  && chromedriver --version
 
 ################## END BROWSERS #####################
+
+# install CodeClimate test reporter for coverage reporting
+RUN curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > /usr/local/bin/cc-test-reporter \
+  && chmod +x /usr/local/bin/cc-test-reporter
 
 # Set DISPLAY for xvfb (for Firefox).
 # Note: need to start this manually in Circle.

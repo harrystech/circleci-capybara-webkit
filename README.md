@@ -9,6 +9,7 @@ Our base CircleCI image.
 - Node 8.9.1 (from Joyent's dockerfiles)
 - Chrome latest
 - Chromedriver latest
+- CodeClimate reporter
 
 ## Build
 
