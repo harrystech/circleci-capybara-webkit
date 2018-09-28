@@ -16,9 +16,19 @@ RUN sudo apt-get install -y \
     fonts-liberation \
     libappindicator1 \
     libnss3 \
-    xdg-utils
+    xdg-utils \
+    libxslt1.1 \
+    libxslt1-dev \
+    libxml2 \
+    libxml2-dev \
+    libpq-dev
 
 USER root
+
+# Update libc6 for heroku-buildpack-ruby
+RUN echo "deb http://deb.debian.org/debian buster main" >> /etc/apt/sources.list
+RUN apt-get update
+RUN apt-get -t buster install libc6 build-essential ruby-dev
 
 ############ BEGIN NODE DOCKERFILE ####################
 # COPY-PASTED FROM NODE 8 INSTALLATION FROM https://raw.githubusercontent.com/nodejs/docker-node/master/8/Dockerfile
@@ -37,6 +47,7 @@ RUN set -ex \
     56730D5401028683275BD23C23EFEFE93C4CFFFE \
     77984A986EBC2AA786BC0F66B01FBB92821C587A \
   ; do \
+    gpg --keyserver keyserver.ubuntu.com --recv-keys "$key" || \
     gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
     gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
@@ -68,6 +79,7 @@ RUN set -ex \
   && for key in \
     6A010C5166006599AA17F08146C2130DFD2497F5 \
   ; do \
+    gpg --keyserver keyserver.ubuntu.com --recv-keys "$key" || \
     gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
     gpg --keyserver keyserver.pgp.com --recv-keys "$key" || \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" ; \
