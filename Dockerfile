@@ -85,25 +85,6 @@ RUN set -ex \
 
 ################ BEGIN BROWSERS #####################
 
-# Install geckodriver
-RUN \
-    url=https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz \
-    && curl -s -L "$url" | tar -xz \
-    && chmod +x geckodriver \
-    && mv geckodriver /usr/local/bin
-
-
-########
-# install firefox
-ENV PATH /firefox:$PATH
-RUN FIREFOX_URL="https://download-installer.cdn.mozilla.net/pub/firefox/releases/57.0/linux-x86_64/en-US/firefox-57.0.tar.bz2" \
-    FIREFOX_SHA256="c2cae016089e816c03283a359c582efab3bca34e6048ecc2382b43c1eb342457" \
-  && curl --silent --show-error --location --fail --retry 3 --output /tmp/firefox.tar.bz2 $FIREFOX_URL \
-  && echo "$FIREFOX_SHA256 /tmp/firefox.tar.bz2" | sha256sum -c \
-  && tar -jxf /tmp/firefox.tar.bz2 \
-  && rm /tmp/firefox.tar.bz2 \
-  && firefox --version
-
 # install chrome
 RUN curl --silent --show-error --location --fail --retry 3 --output /tmp/google-chrome-stable_current_amd64.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
       && (dpkg -i /tmp/google-chrome-stable_current_amd64.deb || apt-get -fy install)  \
@@ -123,10 +104,6 @@ RUN export CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chrome
       && chromedriver --version
 
 ################## END BROWSERS #####################
-
-# Set DISPLAY for xvfb (for Firefox).
-# Note: need to start this manually in Circle.
-ENV DISPLAY :99
 
 USER circleci
 
